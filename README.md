@@ -28,4 +28,12 @@ The producer application is a Quarkus-based service that sends messages to the A
 
 ## Consumer Application
 
-The consumer application is also
+
+The consumer application is also a Quarkus-based service that receives messages from the AMQ Broker. It uses the same connection configuration as the producer.
+
+## Deployment
+
+To deploy the applications:
+
+1. Ensure the AMQ Broker Operator is installed in your OpenShift cluster.
+2. Apply the AMQ Broker custom resource:
