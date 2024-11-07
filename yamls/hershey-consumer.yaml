@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hershey-consumer
+  namespace: hersheys
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hershey-consumer
+  template:
+    metadata:
+      labels:
+        app: hershey-consumer
+    spec:
+      containers:
+      - name: hershey-consumer
+        image: image-registry.openshift-image-registry.svc:5000/hersheys/hershey-consumer:1.0.0-SNAPSHOT
+        ports:
+        - containerPort: 8080
+        env:
+        - name: AMQP_HOST
+          value: "hershey-broker-amqp-acceptor-0-svc"
+        - name: AMQP_PORT
+          value: "5672"
+        - name: AMQP_USERNAME
+          value: "admin"
+        - name: AMQP_PASSWORD
+          value: "admin"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hershey-consumer
+  namespace: hersheys
+spec:
+  selector:
+    app: hershey-consumer
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

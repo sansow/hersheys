@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hershey-producer
+  namespace: hersheys
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hershey-producer
+  template:
+    metadata:
+      labels:
+        app: hershey-producer
+    spec:
+      containers:
+      - name: hershey-producer
+        image: image-registry.openshift-image-registry.svc:5000/hersheys/hershey-producer:1.0.0-SNAPSHOT
+        ports:
+        - containerPort: 8080
+        env:
+        - name: AMQP_HOST
+          value: "hershey-broker-amqp-acceptor-0-svc"
+        - name: AMQP_PORT
+          value: "5672"
+        - name: AMQP_USERNAME
+          value: "admin"
+        - name: AMQP_PASSWORD
+          value: "admin"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hershey-producer
+  namespace: hersheys
+spec:
+  selector:
+    app: hershey-producer
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

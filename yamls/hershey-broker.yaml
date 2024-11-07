@@ -1,0 +1,25 @@
+apiVersion: broker.amq.io/v1beta1
+kind: ActiveMQArtemis
+metadata:
+  name: hershey-broker
+  namespace: hersheys
+spec:
+  acceptors:
+    - anycastPrefix: anycast
+      bindToAllInterfaces: true
+      name: amqp-acceptor
+      port: 5672
+      protocols: amqp
+  adminPassword: admin
+  adminUser: admin
+  console:
+    expose: true
+  deploymentPlan:
+    image: registry.redhat.io/amq7/amq-broker-rhel8@sha256:137b893ad15e0cd5353bae134c8fae833257a12641b12d0f774f1565ce66f63c
+    jolokiaAgentEnabled: false
+    journalType: nio
+    managementRBACEnabled: true
+    messageMigration: false
+    persistenceEnabled: true
+    requireLogin: false
+    size: 2
