@@ -20,7 +20,7 @@ spec:
         - containerPort: 8080
         env:
         - name: AMQP_HOST
-          value: "hershey-broker-amqp-acceptor-0-svc"
+          value: "hershey-broker-amqp-acceptor-1-svc"
         - name: AMQP_PORT
           value: "5672"
         - name: AMQP_USERNAME
