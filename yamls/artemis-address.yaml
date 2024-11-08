@@ -1,0 +1,11 @@
+apiVersion: broker.amq.io/v1beta1
+kind: ActiveMQArtemisAddress
+metadata:
+  name: hershey-address
+  namespace: hersheys
+spec:
+  addressName: hershey-1
+  password: admin
+  queueName: hershey-q
+  routingType: anycast
+  user: admin
