@@ -1,4 +1,4 @@
-# Hershey's AMQ Broker Project
+# Hershey's AMQ Broker Starter Project
 
 This repository contains the configuration and code for setting up an AMQ Broker with producer and consumer applications in OpenShift.
 
